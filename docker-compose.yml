@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  stitcher:
+    container_name: stitcher
+    image: node:13.12.0-alpine
+    user: "${UID}:${GID}"
+    volumes:
+      - .:/var/www/stitcher
+    ports:
+      - "3000:3000"
+    working_dir: /var/www/stitcher
+    command: npm run dev
