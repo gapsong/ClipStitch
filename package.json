@@ -9,7 +9,7 @@
     "fetchComments": "npm run build && node dist/commentFetch.js",
     "serve": "npm run build && node dist/index.js",
     "dev": "nodemon --ignore './dist/' -e js  --exec \"npm run serve\"",
-    "test": "npm run build && mocha --require @babel/register"
+    "test": "npm run build && mocha --watch --require @babel/register"
   },
   "author": "James Kyle <me@thejameskyle.com>",
   "license": "ISC",
@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "expect.js": "^0.3.1",
     "lodash.get": "^4.4.2"
   }
 }
