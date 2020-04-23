@@ -12,9 +12,9 @@ describe('converts Time correctly', () => {
         expect(convertDurationtoSeconds('2h44m2s')).to.equal(9842)
     })
     it('should test without seconds', () => {
-        expect(convertDurationtoSeconds('2h44m')).to.equal(9840)
-    })    
+        expect(convertDurationtoSeconds('2h44m0s')).to.equal(9840)
+    })
     it('should test without hours and without seconds', () => {
-        expect(convertDurationtoSeconds('44m')).to.equal(2640)
+        expect(convertDurationtoSeconds('44m0s')).to.equal(2640)
     })
 })
