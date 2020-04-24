@@ -1,5 +1,7 @@
-import { convertDurationtoSeconds } from '../lib/commentFetch'
-var expect = require('expect.js')
+import expect from 'expect.js'
+import {
+    convertDurationtoSeconds,
+} from '../lib/commentFetch'
 
 describe('Example Node Server', () => {
     it('should return 200', (done) => {
