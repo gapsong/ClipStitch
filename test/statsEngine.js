@@ -1,13 +1,30 @@
 import expect from 'expect.js'
 import {
     getAverageNumberComments,
-    getAverageNumberAroundIndex,
+    getAverageCountFromTo,
     getEntriesPerSeconds,
 } from '../lib/statsEngine'
 
-describe('get Average Value', () => {
+describe.skip('get Average Value', () => {
     it('should return the average value of the comment times', () => {
-        expect(getAverageNumberComments()).to.equal(10.22)
+        const mockData = [
+            {
+                content_offset_seconds: 0.5,
+            },
+            {
+                content_offset_seconds: 0.5,
+            },
+            {
+                content_offset_seconds: 2,
+            },
+            {
+                content_offset_seconds: 2.5,
+            },
+            {
+                content_offset_seconds: 4,
+            },
+        ]
+        expect(getAverageNumberComments(mockData)).to.equal(10.22)
     })
 })
 
@@ -57,8 +74,13 @@ describe('getEntriesPerSeconds()', () => {
     })
 })
 
-describe.skip('get Average Value in interval around pivot', () => {
-    it('should return the average value of the comment times', () => {
-        expect(getAverageNumberAroundIndex(5, 3)).to.equal(10.22)
+describe('getAverageCountFromTo()', () => {
+    it('tests 1', () => {
+        const mockData = [1, 3, 5, 3, 2, 8, 6, 5, 3, 2]
+        expect(getAverageCountFromTo(mockData, 0, 5)).to.equal(2.8)
+    })
+    it('test 2', () => {
+        const mockData = [1, 3, 5, 3, 2, 8, 6, 5, 3, 2]
+        expect(getAverageCountFromTo(mockData, 0, 6)).to.equal(3.66)
     })
 })
