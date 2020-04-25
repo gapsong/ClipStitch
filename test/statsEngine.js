@@ -1,32 +1,9 @@
 import expect from 'expect.js'
 import {
-    getAverageNumberComments,
+    getSlidingAverage,
     getAverageCountFromTo,
     getEntriesPerSeconds,
 } from '../lib/statsEngine'
-
-describe.skip('get Average Value', () => {
-    it('should return the average value of the comment times', () => {
-        const mockData = [
-            {
-                content_offset_seconds: 0.5,
-            },
-            {
-                content_offset_seconds: 0.5,
-            },
-            {
-                content_offset_seconds: 2,
-            },
-            {
-                content_offset_seconds: 2.5,
-            },
-            {
-                content_offset_seconds: 4,
-            },
-        ]
-        expect(getAverageNumberComments(mockData)).to.equal(10.22)
-    })
-})
 
 describe('getEntriesPerSeconds()', () => {
     it('should return an array with comments per second', () => {
@@ -75,12 +52,49 @@ describe('getEntriesPerSeconds()', () => {
 })
 
 describe('getAverageCountFromTo()', () => {
-    it('tests 1', () => {
+    it('test 1', () => {
         const mockData = [1, 3, 5, 3, 2, 8, 6, 5, 3, 2]
         expect(getAverageCountFromTo(mockData, 0, 5)).to.equal(2.8)
     })
     it('test 2', () => {
         const mockData = [1, 3, 5, 3, 2, 8, 6, 5, 3, 2]
         expect(getAverageCountFromTo(mockData, 0, 6)).to.equal(3.66)
+    })
+})
+
+describe('getSlidingAverage()', () => {
+    //moving average. sliding window
+
+    it('test 0', () => {
+        const mockData = [1]
+        expect(getSlidingAverage(mockData, 4)).to.eql([])
+    })
+
+    it('test 1', () => {
+        const mockData = [1, 3, 5, 3, 2, 8, 6, 5, 3, 2]
+        expect(getSlidingAverage(mockData, 4)).to.eql([
+            3,
+            3.25,
+            4.5,
+            4.75,
+            5.25,
+            5.5,
+            4,
+        ])
+    })
+
+    it('test 2', () => {
+        const mockData = [1, 3, 0, 3, 0, 8, 6, 5, 3, 12]
+        expect(getSlidingAverage(mockData, 2)).to.eql([
+            2,
+            1.5,
+            1.5,
+            1.5,
+            4,
+            7,
+            5.5,
+            4,
+            7.5,
+        ])
     })
 })
