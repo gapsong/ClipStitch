@@ -67,12 +67,14 @@ describe('getSlidingAverage()', () => {
 
     it('test 0', () => {
         const mockData = [1]
-        expect(getSlidingAverage(mockData, 4)).to.eql([])
+        const windowSize = 4
+        expect(getSlidingAverage(mockData, windowSize)).to.eql([])
     })
 
     it('test 1', () => {
         const mockData = [1, 3, 5, 3, 2, 8, 6, 5, 3, 2]
-        expect(getSlidingAverage(mockData, 4)).to.eql([
+        const windowSize = 4
+        expect(getSlidingAverage(mockData, windowSize)).to.eql([
             3,
             3.25,
             4.5,
@@ -85,7 +87,8 @@ describe('getSlidingAverage()', () => {
 
     it('test 2', () => {
         const mockData = [1, 3, 0, 3, 0, 8, 6, 5, 3, 12]
-        expect(getSlidingAverage(mockData, 2)).to.eql([
+        const windowSize = 2
+        expect(getSlidingAverage(mockData, windowSize)).to.eql([
             2,
             1.5,
             1.5,
@@ -96,5 +99,14 @@ describe('getSlidingAverage()', () => {
             4,
             7.5,
         ])
+    })
+})
+
+describe('getActivityPeaks()', () => {
+    it('test 1', () => {
+        const multiplier = 4
+        const mockData = []
+
+        expect(getActivityPeaks(mockData)).to.eql([])
     })
 })
