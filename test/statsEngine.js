@@ -4,6 +4,7 @@ import {
     getSlidingAverage,
     getAverageCountFromTo,
     getEntriesPerSeconds,
+    sumArray,
 } from '../lib/statsEngine'
 
 describe('getEntriesPerSeconds()', () => {
@@ -28,8 +29,8 @@ describe('getEntriesPerSeconds()', () => {
 
         expect(getEntriesPerSeconds(mockData)).to.eql([2, 0, 2, 0, 1])
     })
-    
-    it('should return an array with comments per second', () => {
+
+    it('should return an array with comments per even if last one is invalid', () => {
         const mockData = [
             {
                 content_offset_seconds: 0.5,
@@ -131,12 +132,21 @@ describe('getSlidingAverage()', () => {
     })
 })
 
-describe('getActivityPeaks()', () => {
+describe.skip('getActivityPeaks()', () => {
     it('test 1', () => {
         const threshold = 4
         const mockData = [1, 3, 5, 3, 2, 8, 6, 5, 3, 2]
         const sldingAverage = [3, 3.25, 4.5, 4.75, 5.25, 5.5, 4]
 
         expect(getActivityPeaks(mockData, sldingAverage, threshold)).to.eql([])
+    })
+})
+
+describe('sumArray()', () => {
+    it('test 1', () => {
+        const windowSize = 4
+        const mockData = [1, 3, 5, 3, 2, 8, 6, 5, 3, 2]
+
+        expect(sumArray(mockData, windowSize)).to.eql([12, 21, 5])
     })
 })
