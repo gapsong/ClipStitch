@@ -9,7 +9,8 @@
     "fetchComments": "npm run build && node dist/commentFetch.js",
     "serve": "npm run build && node dist/index.js",
     "dev": "nodemon --ignore './dist/' -e js  --exec \"npm run serve\"",
-    "test": "npm run build && mocha --watch --require @babel/register"
+    "testWatch": "npm run build && mocha --watch --require @babel/register",
+    "testPipeline": "npm run build && mocha --require @babel/register"
   },
   "author": "James Kyle <me@thejameskyle.com>",
   "license": "ISC",
