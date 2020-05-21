@@ -149,4 +149,11 @@ describe('sumArray()', () => {
 
         expect(sumArray(mockData, windowSize)).to.eql([12, 21, 5])
     })
+
+    it('test 1', () => {
+        const windowSize = 4
+        const mockData = [1, 3, 5, 3, 2, 8, 6, 5, 3, 2]
+
+        expect(sumArray(mockData, windowSize)).to.eql([2, 21, 5])
+    })
 })
