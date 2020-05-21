@@ -1,12 +1,4 @@
-import axios from 'axios'
-import fs from 'fs'
-
-import { fetchTwitchChatById } from './fetchTwitchChat'
-import comments from '../625659892.json'
-import { getEntriesPerSeconds, sumArray } from './statsEngine'
-
 const getCloudFrontDomainById = async (videoId) => {
-    // https://gql.twitch.tv/gql#origin=twilight
     return await axios({
         method: 'POST',
         url: 'https://gql.twitch.tv/gql#origin=twilight',
@@ -48,39 +40,7 @@ const downloadVideoChunk = async (cloudfront, chunkNumber) => {
     })
 }
 
-const main = async (VIDEO_ID) => {
-    // const cloudFrontUrl = await getCloudFrontDomainById(VIDEO_ID)
-    // downloadVideoChunk(cloudFrontUrl, 2)
-    // const comments = await getCommentsById(VIDEO_ID)
-    // const filteredArray = ultimateTimestampAlgorithm(comments, [
-    //     'cannon',
-    //     'CANNON',
-    //     'Cannon',
-    // ])
-    // Promise.all(
-    //     timeStampsArray.map((timestamp) => {
-    //         console.log(timestamp)
-    //         downloadVideoChunk(cloudFrontUrl, timestamp)
-    //     })
-    // )
+export const getVideoChunk = async (videoId, chunkNumber) => {
+    const cloudFrontUrl = await getCloudFrontDomainById(videoId)
+    downloadVideoChunk(cloudFrontUrl, chunkNumber)
 }
-
-// main(625659892)
-
-// printAnalysis()
-
-// json data
-
-// parse json
-// stringify JSON Object
-var jsonContent = JSON.stringify(sumArray(getEntriesPerSeconds(comments), 10))
-console.log(jsonContent)
-
-fs.writeFile('output.json', jsonContent, 'utf8', function (err) {
-    if (err) {
-        console.log('An error occured while writing JSON Object to File.')
-        return console.log(err)
-    }
-
-    console.log('JSON file has been saved.')
-})

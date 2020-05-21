@@ -5,7 +5,7 @@ import {
     getAverageCountFromTo,
     getEntriesPerSeconds,
     sumArray,
-} from '../lib/statsEngine'
+} from '../src/lib/statsUtils'
 
 describe('getEntriesPerSeconds()', () => {
     it('should return an array with comments per second', () => {

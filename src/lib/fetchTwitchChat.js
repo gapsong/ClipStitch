@@ -6,7 +6,7 @@ import events from 'events'
 const eventEmitter = new events.EventEmitter()
 
 const getVideoDuration = async (videoId) => {
-    await axios
+    return await axios
         .get(`https://api.twitch.tv/kraken/videos/${videoId}`, {
             headers: { 'Client-Id': 'kimne78kx3ncx6brgo4mv6wki5h1ko' },
         })
@@ -23,8 +23,9 @@ const fetchRawCommentsById = async (videoId) => {
     const videoDuration = await getVideoDuration(videoId)
     var stream
     stream = fs.createWriteStream(`${videoId}.json`)
-    stream.write(`{"videoId": 625659892, 
+    stream.write(`{"videoId": ${videoId}, 
     "comments": [`)
+
     streamCommentsIntoFile(stream, videoId, videoDuration)
 }
 
@@ -68,6 +69,9 @@ const streamCommentsIntoFile = async (
                 },
                 []
             )
+
+            console.log(results[results.length - 1].content_offset_seconds)
+            console.log('videoDuration',videoDuration)
             console.log(
                 'You are at: ' +
                     (
