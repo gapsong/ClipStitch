@@ -1,6 +1,6 @@
 export const filterCommentsByWords = (array, substrings) => {
     return array.filter((item) => {
-        const str = item.comment
+        const str = item.message
         if (str.length > 15) {
             return false
         }
@@ -11,29 +11,23 @@ export const filterCommentsByWords = (array, substrings) => {
     })
 }
 
-export const timestampCleanup = (cleanComments) => {
-    const temp = cleanComments.map((item) => {
-        return [Math.floor(item.time / 10) - 1, Math.floor(item.time / 10)]
-    })
-    return [...new Set(temp.flat())]
-}
-
-export const ultimateTimestampAlgorithm = (cleanComments, tags) => {
-    cleanComments = cleanComments.filter((item) => {
-        const str = item.comment
+// _____| __________ | | | ____________ input
+//      ^            ^                  output
+export const ultimateTimestampAlgorithm = (array, tags) => {
+    array = array.filter((item) => {
+        const str = item.message
         return tags.some((v) => {
             return str.includes(v)
         })
     })
-    const nachher = delete10Schritt(cleanComments, 1000)
-    return nachher
+
+    return getFirstFindings(array, 10)
 }
 
-// get returns first finding in speficied time
-// delta in ms
-const delete10Schritt = (cleanComments = [], delta) => {
-    let timestamps = [cleanComments[0]]
-    cleanComments.forEach((item, index) => {
+// get returns first finding in specified time
+const getFirstFindings = (array = [], delta) => {
+    let timestamps = [array[0]]
+    array.forEach((item, index) => {
         if (
             0 < index &&
             timestamps[timestamps.length - 1].time + delta < item.time
