@@ -70,8 +70,6 @@ const streamCommentsIntoFile = async (
                 []
             )
 
-            console.log(results[results.length - 1].content_offset_seconds)
-            console.log('videoDuration',videoDuration)
             console.log(
                 'You are at: ' +
                     (
@@ -88,7 +86,11 @@ const streamCommentsIntoFile = async (
                 })
                 streamCommentsIntoFile(stream, videoId, videoDuration, nextPage)
             } else {
-                stream.write(`]]`)
+                const lastElement = results.pop()
+                results.forEach((item) => {
+                    stream.write(JSON.stringify(item, null, 4) + ',')
+                })
+                stream.write(JSON.stringify(lastElement, null, 4) + ']}')
                 //Fire the 'scream' event:
                 eventEmitter.emit('finishedDownload')
             }
