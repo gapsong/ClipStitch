@@ -5,12 +5,13 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "babel src -d dist",
-    "start": "npm run build && nodemon dist/index.js",
+    "start": "npm run build && node dist/index.js",
     "fetchComments": "npm run build && node dist/commentFetch.js",
     "serve": "npm run build && node dist/index.js",
     "dev": "nodemon --ignore './dist/' -e js  --exec \"npm run serve\"",
     "testWatch": "npm run build && mocha --watch --require @babel/register",
-    "testPipeline": "npm run build && mocha --require @babel/register"
+    "testPipeline": "npm run build && mocha --require @babel/register",
+    "myScript": "npm run build -e 'require(\"./someFile\").someFunction()'"
   },
   "author": "James Kyle <me@thejameskyle.com>",
   "license": "ISC",

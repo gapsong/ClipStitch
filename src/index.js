@@ -2,7 +2,7 @@ import { fetchTwitchChatById } from './lib/fetchTwitchChat'
 
 const VIDEO_ID = 627447662
 
-// fetchTwitchChatById(VIDEO_ID)
+fetchTwitchChatById(VIDEO_ID)
 
 // var jsonContent = JSON.stringify(sumArray(getEntriesPerSeconds(comments), 10))
 // console.log(jsonContent)
