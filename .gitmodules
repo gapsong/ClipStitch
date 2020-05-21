@@ -1,0 +1,3 @@
+[submodule "ClipStitchAnalysis"]
+	path = ClipStitchAnalysis
+	url = git@github.com:gapsong/ClipStitchAnalysis.git
