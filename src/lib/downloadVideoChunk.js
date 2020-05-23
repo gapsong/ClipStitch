@@ -12,17 +12,14 @@ const getCloudFrontDomainById = async (videoId) => {
                 extensions: {
                     persistedQuery: {
                         version: 1,
-                        sha256Hash:
-                            '988844d55fb7369e30832ec236b7a7c96bb0d53617e2f55ebb1030008336120f',
+                        sha256Hash: '988844d55fb7369e30832ec236b7a7c96bb0d53617e2f55ebb1030008336120f',
                     },
                 },
             },
         ],
     })
         .then(function (response) {
-            return response.data[0].data.video.seekPreviewsURL.split(
-                '/story'
-            )[0]
+            return response.data[0].data.video.seekPreviewsURL.split('/story')[0]
         })
         .catch(function (error) {
             console.log(error)

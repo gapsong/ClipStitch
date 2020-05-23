@@ -28,10 +28,7 @@ export const ultimateTimestampAlgorithm = (array, tags) => {
 const getFirstFindings = (array = [], delta) => {
     let timestamps = [array[0]]
     array.forEach((item, index) => {
-        if (
-            0 < index &&
-            timestamps[timestamps.length - 1].time + delta < item.time
-        ) {
+        if (0 < index && timestamps[timestamps.length - 1].time + delta < item.time) {
             timestamps.push(item)
         }
     })

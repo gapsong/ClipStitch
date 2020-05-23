@@ -12,9 +12,7 @@ export const getEntriesPerSeconds = (array) => {
     if (!Array.isArray(array) || !array.length) {
         return []
     }
-    const temp = new Array(
-        Math.floor(array[array.length - 1].content_offset_seconds) + 1
-    ).fill(0)
+    const temp = new Array(Math.floor(array[array.length - 1].content_offset_seconds) + 1).fill(0)
 
     return array.reduce((acc, item) => {
         const second = Math.floor(item.content_offset_seconds)
@@ -24,10 +22,8 @@ export const getEntriesPerSeconds = (array) => {
 }
 
 export const sumArray = (array, windowSize) => {
-    const response = new Array(Math.floor(array.length / windowSize) + 1).fill(
-        0
-    )
-    
+    const response = new Array(Math.floor(array.length / windowSize) + 1).fill(0)
+
     return array.reduce((acc, item, index) => {
         const temp = Math.floor(index / windowSize)
         acc[temp] += item
@@ -52,8 +48,4 @@ export const getSlidingAverage = (values = [], windowSize = 0) => {
     return temp
 }
 
-export const getActivityPeaks = (
-    mockData = [],
-    sldingAverage = [],
-    threshold = 0
-) => {}
+export const getActivityPeaks = (mockData = [], sldingAverage = [], threshold = 0) => {}
