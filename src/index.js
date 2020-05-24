@@ -7,17 +7,16 @@ import { filterCommentsByWords } from './lib/utils'
 const VIDEO_ID = 621148192
 
 const callback = () => {
-    const PATH = `./../ClipStitchVisualizer/src/chatCollection/rawData/${VIDEO_ID}.json`
-    const chatHistory = require(PATH)
+    const rawComments = require(`./../ClipStitchVisualizer/src/chatCollection/rawData/${VIDEO_ID}.json`)
     const filteredTags = ['LOL', 'LULW', 'KEKW', 'WTF', 'LMAO', 'lol', 'clip', 'OMEGALUL']
-    const level0 = filterCommentsByWords(chatHistory.comments, filteredTags)
+    const level0 = filterCommentsByWords(rawComments.comments, filteredTags)
     const level1 = getEntriesPerSeconds(level0)
     const level2 = sumArray(level1, 10)
     const jsonContent = JSON.stringify(
         {
             videoId: VIDEO_ID,
             filteredTags: filteredTags,
-            rawComments: chatHistory.comments,
+            rawComments: rawComments.comments,
             entriesPerSeconds: level1,
             filteredComments: level2,
         },
@@ -31,7 +30,7 @@ const callback = () => {
             return console.log(err)
         }
 
-        console.log('JSON file has been saved.')
+        console.log('Alle Filter wurden eingebaut')
     })
 }
 
