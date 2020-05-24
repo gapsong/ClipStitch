@@ -1,7 +1,6 @@
 import axios from 'axios'
 import get from 'lodash.get'
 import fs from 'fs'
-import events from 'events'
 
 const getVideoDuration = async (videoId) => {
     return await axios
@@ -20,7 +19,7 @@ const getVideoDuration = async (videoId) => {
 const fetchRawCommentsById = async (videoId, callback) => {
     const videoDuration = await getVideoDuration(videoId)
     var stream
-    stream = fs.createWriteStream(`${videoId}.json`)
+    stream = fs.createWriteStream(`./ClipStitchVisualizer/src/chatCollection/rawData/${videoId}.json`)
     stream.write(`{"videoId": ${videoId}, 
     "comments": [`)
 
