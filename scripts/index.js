@@ -10,15 +10,16 @@ const callback = () => {
     const rawComments = require(`./../src/chatCollection/rawData/${VIDEO_ID}.json`)
     const filteredTags = ['LOL', 'LULW', 'KEKW', 'WTF', 'LMAO', 'lol', 'clip', 'OMEGALUL']
     const level0 = filterCommentsByWords(rawComments.comments, filteredTags)
-    const level1 = getEntriesPerSeconds(level0)
-    const level2 = sumArray(level1, 10)
+    const level1 = sumArray(getEntriesPerSeconds(level0), 10)
+    const level2 = sumArray(getEntriesPerSeconds(rawComments.comments), 10)
+
     const jsonContent = JSON.stringify(
         {
             videoId: VIDEO_ID,
             filteredTags: filteredTags,
             rawComments: rawComments.comments,
-            entriesPerSeconds: level1,
-            filteredComments: level2,
+            entriesPerSeconds: level2,
+            filteredComments: level1,
         },
         null,
         4
