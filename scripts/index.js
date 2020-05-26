@@ -8,7 +8,7 @@ const VIDEO_ID = 621148192
 
 const callback = () => {
     const rawComments = require(`./../src/chatCollection/rawData/${VIDEO_ID}.json`)
-    const filteredTags = ['LOL', 'LULW', 'KEKW', 'WTF', 'LMAO', 'lol', 'clip', 'OMEGALUL']
+    const filteredTags = ['LOL', 'LULW', 'KEKW', 'WTF', 'LMAO', 'lol', 'clip', 'OMEGALUL', 'POG', 'pog', 'POGGERS', 'PogU', 'pogu']
     const level0 = filterCommentsByWords(rawComments.comments, filteredTags)
     const level1 = sumArray10(level0)
     const level2 = sumArray10(rawComments.comments)
