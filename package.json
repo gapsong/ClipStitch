@@ -4,7 +4,7 @@
     "description": "Example Node Server w/ Babel",
     "main": "lib/index.js",
     "scripts": {
-        "build": "babel src -d dist",
+        "build": "babel scripts -d dist",
         "start": "npm run build && node dist/index.js",
         "fetchComments": "npm run build && node dist/commentFetch.js",
         "serve": "npm run build && node dist/index.js",
@@ -12,8 +12,8 @@
         "testWatch": "npm run build && mocha --watch --require @babel/register",
         "testPipeline": "npm run build && mocha --require @babel/register",
         "myScript": "npm run build -e 'require(\"./someFile\").someFunction()'",
-        "react-start": "react-scripts start",
-        "react-buils": "react-scripts build",
+        "rs": "react-scripts start",
+        "rb": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },

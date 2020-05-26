@@ -19,7 +19,7 @@ const getVideoDuration = async (videoId) => {
 const fetchRawCommentsById = async (videoId, callback) => {
     const videoDuration = await getVideoDuration(videoId)
     var stream
-    stream = fs.createWriteStream(`./ClipStitchVisualizer/src/chatCollection/rawData/${videoId}.json`)
+    stream = fs.createWriteStream(`./src/chatCollection/rawData/${videoId}.json`)
     stream.write(`{"videoId": ${videoId}, 
     "comments": [`)
 
