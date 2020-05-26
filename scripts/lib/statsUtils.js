@@ -48,4 +48,6 @@ export const getSlidingAverage = (values = [], windowSize = 0) => {
     return temp
 }
 
+export const sumArray10 = (array) => sumArray(getEntriesPerSeconds(array), 10)
+
 export const getActivityPeaks = (mockData = [], sldingAverage = [], threshold = 0) => {}

@@ -1,7 +1,7 @@
 import fs from 'fs'
 
 import { fetchTwitchChatById } from './lib/fetchTwitchChat'
-import { sumArray, getEntriesPerSeconds } from './lib/statsUtils'
+import { sumArray10 } from './lib/statsUtils'
 import { filterCommentsByWords } from './lib/utils'
 
 const VIDEO_ID = 621148192
@@ -10,8 +10,8 @@ const callback = () => {
     const rawComments = require(`./../src/chatCollection/rawData/${VIDEO_ID}.json`)
     const filteredTags = ['LOL', 'LULW', 'KEKW', 'WTF', 'LMAO', 'lol', 'clip', 'OMEGALUL']
     const level0 = filterCommentsByWords(rawComments.comments, filteredTags)
-    const level1 = sumArray(getEntriesPerSeconds(level0), 10)
-    const level2 = sumArray(getEntriesPerSeconds(rawComments.comments), 10)
+    const level1 = sumArray10(level0)
+    const level2 = sumArray10(rawComments.comments)
 
     const jsonContent = JSON.stringify(
         {
