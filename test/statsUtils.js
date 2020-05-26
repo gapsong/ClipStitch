@@ -1,11 +1,5 @@
 import expect from 'expect.js'
-import {
-    getActivityPeaks,
-    getSlidingAverage,
-    getAverageCountFromTo,
-    getEntriesPerSeconds,
-    sumArray,
-} from '../scripts/lib/statsUtils'
+import { getActivityPeaks, getSlidingAverage, getAverageCountFromTo, getEntriesPerSeconds, sumArray } from '../scripts/lib/statsUtils'
 
 describe('getEntriesPerSeconds()', () => {
     it('should return an array with comments per second', () => {
@@ -103,32 +97,14 @@ describe('getSlidingAverage()', () => {
         const mockData = [1, 3, 5, 3, 2, 8, 6, 5, 3, 2]
         const windowSize = 4
 
-        expect(getSlidingAverage(mockData, windowSize)).to.eql([
-            3,
-            3.25,
-            4.5,
-            4.75,
-            5.25,
-            5.5,
-            4,
-        ])
+        expect(getSlidingAverage(mockData, windowSize)).to.eql([3, 3.25, 4.5, 4.75, 5.25, 5.5, 4])
     })
 
     it('test 2', () => {
         const mockData = [1, 3, 0, 3, 0, 8, 6, 5, 3, 12]
         const windowSize = 2
 
-        expect(getSlidingAverage(mockData, windowSize)).to.eql([
-            2,
-            1.5,
-            1.5,
-            1.5,
-            4,
-            7,
-            5.5,
-            4,
-            7.5,
-        ])
+        expect(getSlidingAverage(mockData, windowSize)).to.eql([2, 1.5, 1.5, 1.5, 4, 7, 5.5, 4, 7.5])
     })
 })
 
