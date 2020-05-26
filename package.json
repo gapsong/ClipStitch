@@ -1,31 +1,47 @@
 {
-  "name": "example-node-server",
-  "version": "1.0.0",
-  "description": "Example Node Server w/ Babel",
-  "main": "lib/index.js",
-  "scripts": {
-    "build": "babel src -d dist",
-    "start": "npm run build && node dist/index.js",
-    "fetchComments": "npm run build && node dist/commentFetch.js",
-    "serve": "npm run build && node dist/index.js",
-    "dev": "nodemon --ignore './dist/' -e js  --exec \"npm run serve\"",
-    "testWatch": "npm run build && mocha --watch --require @babel/register",
-    "testPipeline": "npm run build && mocha --require @babel/register",
-    "myScript": "npm run build -e 'require(\"./someFile\").someFunction()'"
-  },
-  "author": "James Kyle <me@thejameskyle.com>",
-  "license": "ISC",
-  "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.4.0",
-    "@babel/preset-env": "^7.4.2",
-    "@babel/register": "^7.4.0",
-    "mocha": "^5.2.0",
-    "nodemon": "^1.17.5"
-  },
-  "dependencies": {
-    "axios": "^0.19.2",
-    "expect.js": "^0.3.1",
-    "lodash.get": "^4.4.2"
-  }
+    "name": "example-node-server",
+    "version": "1.0.0",
+    "description": "Example Node Server w/ Babel",
+    "main": "lib/index.js",
+    "scripts": {
+        "build": "babel src -d dist",
+        "start": "npm run build && node dist/index.js",
+        "fetchComments": "npm run build && node dist/commentFetch.js",
+        "serve": "npm run build && node dist/index.js",
+        "dev": "nodemon --ignore './dist/' -e js  --exec \"npm run serve\"",
+        "testWatch": "npm run build && mocha --watch --require @babel/register",
+        "testPipeline": "npm run build && mocha --require @babel/register",
+        "myScript": "npm run build -e 'require(\"./someFile\").someFunction()'",
+        "react-start": "react-scripts start",
+        "react-buils": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject"
+    },
+    "author": "James Kyle <me@thejameskyle.com>",
+    "license": "ISC",
+    "devDependencies": {
+        "@babel/cli": "^7.2.3",
+        "@babel/core": "^7.4.0",
+        "@babel/preset-env": "^7.4.2",
+        "@babel/register": "^7.4.0",
+        "mocha": "^5.2.0",
+        "nodemon": "^1.17.5"
+    },
+    "dependencies": {
+        "axios": "^0.19.2",
+        "expect.js": "^0.3.1",
+        "lodash.get": "^4.4.2"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
 }
