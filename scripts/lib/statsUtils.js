@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 export const getAverageCountFromTo = (array, start, end) => {
     var test = 0
     for (var i = start; i < end; i++) {
@@ -32,19 +34,18 @@ export const sumArray = (array, windowSize) => {
 }
 
 export const getSlidingAverage = (values = [], windowSize = 0) => {
-    if (values.length < windowSize) {
-        return []
+    const delta = Math.floor(windowSize / 2)
+    const temp = []
+    let stuffed
+    if (values.length > windowSize) {
+        stuffed = new Array(delta).fill(0)
+    } else {
+        stuffed = new Array(delta).fill(1)
     }
-
-    let lastAvgValue = getAverageCountFromTo(values, 0, windowSize)
-
-    const temp = [lastAvgValue]
-
-    for (var i = 0; i < values.length - windowSize; i++) {
-        lastAvgValue += (1 / windowSize) * (values[i + windowSize] - values[i])
-        temp.push(lastAvgValue)
+    const stuffedValues = stuffed.concat(values).concat(stuffed)
+    for (var median = 0; median < values.length; median++) {
+        temp.push(getAverageCountFromTo(stuffedValues, median, median + windowSize))
     }
-
     return temp
 }
 
