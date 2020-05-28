@@ -35,17 +35,20 @@ export const sumArray = (array, windowSize) => {
 
 export const getSlidingAverage = (values = [], windowSize = 0) => {
     const delta = Math.floor(windowSize / 2)
-    const temp = []
     let stuffed
     if (values.length > windowSize) {
         stuffed = new Array(delta).fill(0)
     } else {
         return [getAverageCountFromTo(values, 0, values.length)]
     }
+
+    const temp = []
+
     const stuffedValues = stuffed.concat(values).concat(stuffed)
     for (var median = 0; median < values.length; median++) {
         temp.push(getAverageCountFromTo(stuffedValues, median, median + windowSize))
     }
+    
     return temp
 }
 
