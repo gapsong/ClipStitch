@@ -40,7 +40,7 @@ export const getSlidingAverage = (values = [], windowSize = 0) => {
     if (values.length > windowSize) {
         stuffed = new Array(delta).fill(0)
     } else {
-        stuffed = new Array(delta).fill(1)
+        return [getAverageCountFromTo(values, 0, values.length)]
     }
     const stuffedValues = stuffed.concat(values).concat(stuffed)
     for (var median = 0; median < values.length; median++) {
