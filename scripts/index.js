@@ -1,7 +1,7 @@
 import fs from 'fs'
 
 import { fetchTwitchChatById } from './lib/fetchTwitchChat'
-import { sumArray10 } from './lib/statsUtils'
+import { sumArray10, getSlidingAverage } from './lib/statsUtils'
 import { filterCommentsByWords } from './lib/utils'
 
 const VIDEO_ID = 621148192
@@ -12,14 +12,21 @@ const callback = () => {
     const level0 = filterCommentsByWords(rawComments.comments, filteredTags)
     const level1 = sumArray10(level0)
     const level2 = sumArray10(rawComments.comments)
+    const level3 = getSlidingAverage(level2, 100)
+
+    console.log(level1.length)
+    console.log(level2.length)
+
+    var mergedArray = []
+    for (var i = 0; i < Math.min(level1.length, level2.length, level3.length); i++) {
+        mergedArray.push({ raw: level2[i], filtered: level1[i], average: level3[i] })
+    }
 
     const jsonContent = JSON.stringify(
         {
             videoId: VIDEO_ID,
             filteredTags: filteredTags,
-            rawComments: rawComments.comments,
-            entriesPerSeconds: level2,
-            filteredComments: level1,
+            comments: mergedArray,
         },
         null,
         4
