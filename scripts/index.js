@@ -4,7 +4,7 @@ import { fetchTwitchChatById } from './lib/fetchTwitchChat'
 import { sumArray10, getSlidingAverage } from './lib/statsUtils'
 import { filterCommentsByWords } from './lib/utils'
 
-const VIDEO_ID = 621148192
+const VIDEO_ID = 640810556
 
 const callback = () => {
     const rawComments = require(`./../src/chatCollection/rawData/${VIDEO_ID}.json`)
