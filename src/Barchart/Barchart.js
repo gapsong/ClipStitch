@@ -11,6 +11,8 @@ const Barchart = ({ data }) => {
         return acc
     }, 0)
 
+    const scaler = (value) => (value / max) * SCALE
+
     return (
         <ui.Wrapper>
             Twitch chat
@@ -21,20 +23,26 @@ const Barchart = ({ data }) => {
             })}
             <ui.Scrollview>
                 {data.comments.map((item, index) => {
-                    // const
-
+                    const rawHeight = scaler(item.raw)
+                    const filteredHeight = rawHeight - scaler(item.filtered)
+                    const averageHeight = rawHeight - scaler(item.average)
                     return (
                         <ui.Col
+                            key={index}
                             onClick={() => {
                                 window.open(`https://www.twitch.tv/videos/${data.videoId}?t=${(index - 1) * 10}s`, '_blank')
                             }}
                         >
-                            <ui.Bar height={item.raw / max} scale={SCALE}>
-                                <ui.Line height={item} scale={SCALE} />
-                                <ui.Line height={item} scale={SCALE} />
+                            <ui.Bar height={rawHeight}>
+                                <ui.Line top={filteredHeight} color='green' />
+                                <ui.Line top={averageHeight} color='red' />
                             </ui.Bar>
                             <br />
                             {item.raw}
+                            <br />
+                            {item.filtered}
+                            <br />
+                            {item.average}
                         </ui.Col>
                     )
                 })}

@@ -12,8 +12,8 @@ export const Scrollview = styled.div`
 
 export const Bar = styled.div`
     color: blue;
-    width: 15px;
-    height: ${({ height, scale }) => height * scale}px;
+    width: 40px;
+    height: ${({ height }) => height}px;
     border: 1px solid;
     :hover {
         color: #ed1212;
@@ -22,7 +22,7 @@ export const Bar = styled.div`
 `
 export const Col = styled.div`
     position: relative;
-    width: 15px;
+    width: 40px;
     display: inline-block;
     text-align: center;
     margin-right: 8px;
@@ -30,8 +30,7 @@ export const Col = styled.div`
 
 export const Line = styled.div`
     position: absolute;
-    top: 50px;
-    border-top: 1px solid red;
-    width: 15px;
-    height: ${({ height, scale }) => height * scale}px;
+    top: ${({ top }) => top}px;
+    border-top: 1px solid ${({ color }) => color};
+    width: 40px;
 `
