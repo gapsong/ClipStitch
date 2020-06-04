@@ -20,9 +20,14 @@ export const Bar = styled.div`
         cursor: pointer;
     }
 `
-
 export const Col = styled.div`
     display: inline-block;
     text-align: center;
     margin-right: 8px;
+`
+
+export const Line = styled.div`
+    border-top: 1px solid red;
+    width: 15px;
+    height: ${({ height }) => height * 800}px;
 `

@@ -25,7 +25,9 @@ const Barchart = ({ data }) => {
                                 window.open(`https://www.twitch.tv/videos/${data.videoId}?t=${(index - 1) * 10}s`, '_blank')
                             }}
                         >
-                            {<ui.Bar height={item.raw / max} />}
+                            <ui.Bar height={item.raw / max}>
+                                <ui.Line height={item} />
+                            </ui.Bar>
                             <br />
                             {item.raw}
                         </ui.Col>
