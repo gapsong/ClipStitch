@@ -7,7 +7,7 @@ import { filterCommentsByWords } from './lib/utils'
 const VIDEO_ID = 621148192
 
 const callback = () => {
-    const rawComments = require(`./../src/Barchart/chatCollection/rawData/${VIDEO_ID}.json`)
+    const rawComments = require(`./../src/chatCollection/rawData/${VIDEO_ID}.json`)
     const filteredTags = ['LOL', 'LULW', 'KEKW', 'WTF', 'LMAO', 'lol', 'clip', 'OMEGALUL', 'POG', 'pog', 'POGGERS', 'PogU', 'pogu']
     const level0 = filterCommentsByWords(rawComments.comments, filteredTags)
     const level1 = sumArray10(level0)
@@ -29,7 +29,7 @@ const callback = () => {
         4
     )
 
-    fs.writeFile(`./src/Barchart/chatCollection/modified/${VIDEO_ID}.json`, jsonContent, 'utf8', function (err) {
+    fs.writeFile(`./src/chatCollection/modified/${VIDEO_ID}.json`, jsonContent, 'utf8', function (err) {
         if (err) {
             console.log('An error occured while writing JSON Object to File.')
             return console.log(err)
@@ -39,6 +39,6 @@ const callback = () => {
     })
 }
 
-// fetchTwitchChatById(VIDEO_ID, callback)
+fetchTwitchChatById(VIDEO_ID, callback)
 
-callback()
+// callback()
