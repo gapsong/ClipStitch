@@ -11,6 +11,7 @@ export const Scrollview = styled.div`
 `
 
 export const Bar = styled.div`
+    position: absolute;
     color: blue;
     width: 15px;
     height: ${({ height }) => height * 800}px;
@@ -21,6 +22,7 @@ export const Bar = styled.div`
     }
 `
 export const Col = styled.div`
+    psotion: relative;
     display: inline-block;
     text-align: center;
     margin-right: 8px;

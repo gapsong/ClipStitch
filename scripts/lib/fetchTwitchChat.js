@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { get } from 'lodash.get'
+import get from 'lodash.get'
 import fs from 'fs'
 
 const getVideoDuration = async (videoId) => {
@@ -19,7 +19,8 @@ const getVideoDuration = async (videoId) => {
 const fetchRawCommentsById = async (videoId, callback) => {
     const videoDuration = await getVideoDuration(videoId)
     var stream
-    stream = fs.createWriteStream(`./src/chatCollection/rawData/${videoId}.json`)
+    console.log(__dirname)
+    stream = fs.createWriteStream(`./src/Barchart/chatCollection/rawData/${videoId}.json`)
     stream.write(`{"videoId": ${videoId}, 
     "comments": [`)
 
