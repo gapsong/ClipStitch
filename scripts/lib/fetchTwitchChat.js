@@ -4,7 +4,7 @@ import fs from 'fs'
 
 const getVideoDuration = async (videoId) => {
     return await axios
-        .get(`https://api.twitch.tv/kraken/videos/${videoId}`, {
+        .get(`https://id.twitch.tv/videos/${videoId}`, {
             headers: { 'Client-Id': 'kimne78kx3ncx6brgo4mv6wki5h1ko' },
         })
         .then((response) => {
@@ -19,7 +19,6 @@ const getVideoDuration = async (videoId) => {
 const fetchRawCommentsById = async (videoId, callback) => {
     const videoDuration = await getVideoDuration(videoId)
     var stream
-    console.log(__dirname)
     stream = fs.createWriteStream(`./src/chatCollection/rawData/${videoId}.json`)
     stream.write(`{"videoId": ${videoId}, 
     "comments": [`)
