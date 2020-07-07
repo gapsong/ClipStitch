@@ -43,4 +43,4 @@ const callback = () => {
 // fetchTwitchChatById(VIDEO_ID, callback)
 
 // callback()
-const videoIds = getVideoIdsByTwitchName()
+const videoIds = getVideoIdsByTwitchName('noway4u_sir')

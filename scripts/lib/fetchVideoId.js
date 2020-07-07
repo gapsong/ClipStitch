@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const getVideoIdsByTwitchName = async () => {
+export const getVideoIdsByTwitchName = async (username) => {
     return await axios({
         method: 'POST',
         url: 'https://gql.twitch.tv/gql#origin=twilight',
@@ -8,7 +8,7 @@ export const getVideoIdsByTwitchName = async () => {
         data: [
             {
                 operationName: 'FilterableVideoTower_Videos',
-                variables: { limit: 30, channelOwnerLogin: 'noway4u_sir', broadcastType: null, videoSort: 'TIME' },
+                variables: { limit: 30, channelOwnerLogin: username, broadcastType: null, videoSort: 'TIME' },
                 extensions: {
                     persistedQuery: { version: 1, sha256Hash: 'a937f1d22e269e39a03b509f65a7490f9fc247d7f83d6ac1421523e3b68042cb' },
                 },
