@@ -1,6 +1,7 @@
 import fs from 'fs'
 
 import { fetchTwitchChatById } from './lib/fetchTwitchChat'
+import { getVideoIdsByTwitchName } from './lib/fetchVideoId'
 import { sumArray10, getSlidingAverage } from './lib/statsUtils'
 import { filterCommentsByWords } from './lib/utils'
 
@@ -39,6 +40,7 @@ const callback = () => {
     })
 }
 
-fetchTwitchChatById(VIDEO_ID, callback)
+// fetchTwitchChatById(VIDEO_ID, callback)
 
 // callback()
+const videoIds = getVideoIdsByTwitchName()
