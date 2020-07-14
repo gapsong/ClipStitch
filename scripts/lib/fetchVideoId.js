@@ -8,7 +8,7 @@ export const getVideoIdsByTwitchName = async (username) => {
         data: [
             {
                 operationName: 'FilterableVideoTower_Videos',
-                variables: { limit: 30, channelOwnerLogin: username, broadcastType: null, videoSort: 'TIME' },
+                variables: { limit: 90, channelOwnerLogin: username, broadcastType: null, videoSort: 'TIME' },
                 extensions: {
                     persistedQuery: { version: 1, sha256Hash: 'a937f1d22e269e39a03b509f65a7490f9fc247d7f83d6ac1421523e3b68042cb' },
                 },
