@@ -16,11 +16,12 @@ export const getVideoIdsByTwitchName = async (username) => {
         ],
     })
         .then(function (response) {
-            const temp = response.data[0].data.user.videos.edges.map((item) => {
-                return item.node.id
-            })
-            console.log(temp)
-            return temp
+            const temp = response.data[0].data.user.videos.edges
+                .map((item) => {
+                    return item.node.id
+                })
+                .slice(0, 5)
+            return { username, videoIds: temp }
         })
         .catch(function (error) {
             console.log(error)
