@@ -58,9 +58,6 @@ const streamCommentsIntoFile = async (stream, videoId, videoDuration, nextPage, 
                 } else return acc
             }, [])
 
-            console.log(
-                'You are at: ' + (Math.round(results[results.length - 1].content_offset_seconds) / videoDuration).toFixed(2) * 100 + '%'
-            )
             if (nextPage) {
                 results.forEach((item) => {
                     stream.write(JSON.stringify(item, null, 4) + ',')
