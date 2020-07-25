@@ -1,8 +1,7 @@
 import axios from 'axios'
 import get from 'lodash.get'
 import fs from 'fs'
-
-const CLIENT_ID = 'kimne78kx3ncx6brgo4mv6wki5h1ko'
+import { PATH, CLIENT_ID } from '../config'
 
 const getVideoDuration = async (videoId) => {
     return await axios
@@ -24,7 +23,7 @@ const getVideoDuration = async (videoId) => {
 const fetchRawCommentsById = async (videoId, callback) => {
     const videoDuration = await getVideoDuration(videoId)
     var stream
-    stream = fs.createWriteStream(`./src/chatCollection/rawData/${videoId}.json`)
+    stream = fs.createWriteStream(`${PATH}/rawData/${videoId}.json`)
     stream.on('finish', () => {
         callback(videoId)
     })
