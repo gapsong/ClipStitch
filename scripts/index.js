@@ -7,9 +7,8 @@ import { sumArray10, getSlidingAverage } from './lib/statsUtils'
 import { filterCommentsByWords } from './lib/utils'
 
 const callback = (videoId) => {
-    // const rawComments = require(`./../src/chatCollection/rawData/${videoId}.json`)
-    const rawComments = fs.readFileSync(`./src/chatCollection/rawData/${videoId}.json`, 'utf-8')
-    console.log(rawComments)
+    const rawData = fs.readFileSync(`./src/chatCollection/rawData/${videoId}.json`, 'utf-8')
+    let rawComments = JSON.parse(rawData)
     const filteredTags = ['LOL', 'LULW', 'KEKW', 'WTF', 'LMAO', 'lol', 'clip', 'OMEGALUL', 'POG', 'pog', 'POGGERS', 'PogU', 'pogu']
     const level0 = filterCommentsByWords(rawComments.comments, filteredTags)
     const level1 = sumArray10(level0)
@@ -37,22 +36,22 @@ const callback = (videoId) => {
     })
 }
 
-// const test = Promise.all(
-//     data.twitchUser.map((user) => {
-//         return getVideoIdsByTwitchName(user)
-//     })
-// ).then((data) => {
-//     fs.writeFile(`./videoIds.json`, JSON.stringify(data, null, 4), 'utf8', function (err) {
-//         if (err) {
-//             console.log('An error occured while writing JSON Object to File.')
-//             return console.log(err)
-//         }
-//     })
-//     data.map((item) => {
-//         return item.videoIds.map((videoId) => {
-//             return fetchTwitchChatById(videoId, callback)
-//         })
-//     })
-// })
+const test = Promise.all(
+    data.twitchUser.map((user) => {
+        return getVideoIdsByTwitchName(user)
+    })
+).then((data) => {
+    fs.writeFile(`./videoIds.json`, JSON.stringify(data, null, 4), 'utf8', function (err) {
+        if (err) {
+            console.log('An error occured while writing JSON Object to File.')
+            return console.log(err)
+        }
+    })
+    data.map((item) => {
+        return item.videoIds.map((videoId) => {
+            return fetchTwitchChatById(videoId, callback)
+        })
+    })
+})
 
-fetchTwitchChatById(689422209, callback)
+// fetchTwitchChatById(689422209, callback)

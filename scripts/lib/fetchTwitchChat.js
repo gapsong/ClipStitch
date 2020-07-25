@@ -25,13 +25,17 @@ const fetchRawCommentsById = async (videoId, callback) => {
     const videoDuration = await getVideoDuration(videoId)
     var stream
     stream = fs.createWriteStream(`./src/chatCollection/rawData/${videoId}.json`)
+    stream.on('finish', () => {
+        callback(videoId)
+    })
+
     stream.write(`{"videoId": ${videoId}, 
     "comments": [`)
 
-    streamCommentsIntoFile(stream, videoId, videoDuration, false, callback)
+    streamCommentsIntoFile(stream, videoId, videoDuration, false)
 }
 
-const streamCommentsIntoFile = async (stream, videoId, videoDuration, nextPage, callback) => {
+const streamCommentsIntoFile = async (stream, videoId, videoDuration, nextPage) => {
     let params
     if (nextPage) {
         params = {
@@ -67,14 +71,13 @@ const streamCommentsIntoFile = async (stream, videoId, videoDuration, nextPage, 
                 results.forEach((item) => {
                     stream.write(JSON.stringify(item, null, 4) + ',')
                 })
-                streamCommentsIntoFile(stream, videoId, videoDuration, nextPage, callback)
+                streamCommentsIntoFile(stream, videoId, videoDuration, nextPage)
             } else {
                 const lastElement = results.pop()
                 results.forEach((item) => {
                     stream.write(JSON.stringify(item, null, 4) + ',')
                 })
                 stream.end(JSON.stringify(lastElement, null, 4) + ']}')
-                callback(videoId)
             }
         })
         .catch(function (error) {
