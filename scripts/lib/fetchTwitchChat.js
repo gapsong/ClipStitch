@@ -2,10 +2,15 @@ import axios from 'axios'
 import get from 'lodash.get'
 import fs from 'fs'
 
+const CLIENT_ID = 'kimne78kx3ncx6brgo4mv6wki5h1ko'
+
 const getVideoDuration = async (videoId) => {
     return await axios
-        .get(`https://id.twitch.tv/videos/${videoId}`, {
-            headers: { 'Client-Id': 'kimne78kx3ncx6brgo4mv6wki5h1ko' },
+        .get(`https://api.twitch.tv/kraken/videos/${videoId}`, {
+            headers: {
+                'Client-Id': CLIENT_ID,
+                Accept: 'application/vnd.twitchtv.v5+json',
+            },
         })
         .then((response) => {
             return response.data.length
@@ -40,7 +45,7 @@ const streamCommentsIntoFile = async (stream, videoId, videoDuration, nextPage, 
 
     return await axios
         .get(`https://api.twitch.tv/v5/videos/${videoId}/comments`, {
-            headers: { 'Client-Id': 'kimne78kx3ncx6brgo4mv6wki5h1ko' },
+            headers: { 'Client-Id': CLIENT_ID },
             params,
         })
         .then((response) => {
@@ -68,7 +73,8 @@ const streamCommentsIntoFile = async (stream, videoId, videoDuration, nextPage, 
                 results.forEach((item) => {
                     stream.write(JSON.stringify(item, null, 4) + ',')
                 })
-                stream.end(JSON.stringify(lastElement, null, 4) + ']}', callback)
+                stream.end(JSON.stringify(lastElement, null, 4) + ']}')
+                callback(videoId)
             }
         })
         .catch(function (error) {
