@@ -36,9 +36,30 @@ const modifyRawComments = (videoId) => {
             }
             console.log('Alle Filter wurden eingebaut')
         })
+        getFinalTimestamps(videoId)
     } catch (error) {
+        console.log(error)
         fetchTwitchChatById(videoId, modifyRawComments)
     }
+}
+
+const getFinalTimestamps = (videoId) => {
+    const modifiedData = fs.readFileSync(`${PATH}/modified/${videoId}.json`, 'utf-8')
+    let modifiedComments = JSON.parse(modifiedData)
+
+    const jsonContent = modifiedComments.comments.map((item, index) => {
+        if (item.filteredTags > item.average) {
+            return JSON.stringify(index * 10, null, 4)
+        }
+    })
+
+    fs.writeFile(`${PATH}/final/${videoId}.json`, jsonContent, 'utf8', function (err) {
+        if (err) {
+            console.log('An error occured while writing JSON Object to File.')
+            return console.log(err)
+        }
+        console.log('Final Timestamps')
+    })
 }
 
 const test = Promise.all(
