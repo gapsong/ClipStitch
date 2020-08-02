@@ -35,8 +35,8 @@ const modifyRawComments = (videoId) => {
                 return console.log(err)
             }
             console.log('Alle Filter wurden eingebaut')
+            getFinalTimestamps(videoId)
         })
-        getFinalTimestamps(videoId)
     } catch (error) {
         console.log(error)
         fetchTwitchChatById(videoId, modifyRawComments)
@@ -46,14 +46,15 @@ const modifyRawComments = (videoId) => {
 const getFinalTimestamps = (videoId) => {
     const modifiedData = fs.readFileSync(`${PATH}/modified/${videoId}.json`, 'utf-8')
     let modifiedComments = JSON.parse(modifiedData)
+    const finalTimestamps = []
 
-    const jsonContent = modifiedComments.comments.map((item, index) => {
-        if (item.filteredTags > item.average) {
-            return JSON.stringify(index * 10, null, 4)
+    modifiedComments.comments.map((item, index) => {
+        if (item.filtered > item.average) {
+            finalTimestamps.push(index * 10)
         }
     })
 
-    fs.writeFile(`${PATH}/final/${videoId}.json`, jsonContent, 'utf8', function (err) {
+    fs.writeFile(`${PATH}/final/${videoId}.json`, JSON.stringify(finalTimestamps, null, 4), 'utf8', function (err) {
         if (err) {
             console.log('An error occured while writing JSON Object to File.')
             return console.log(err)
@@ -62,20 +63,22 @@ const getFinalTimestamps = (videoId) => {
     })
 }
 
-const test = Promise.all(
-    data.twitchUser.map((user) => {
-        return getVideoIdsByTwitchName(user)
-    })
-).then((data) => {
-    fs.writeFile(`./videoIds.json`, JSON.stringify(data, null, 4), 'utf8', function (err) {
-        if (err) {
-            console.log('An error occured while writing JSON Object to File.')
-            return console.log(err)
-        }
-    })
-    data.map((item) => {
-        return item.videoIds.map((videoId) => {
-            return modifyRawComments(videoId)
-        })
-    })
-})
+// const test = Promise.all(
+//     data.twitchUser.map((user) => {
+//         return getVideoIdsByTwitchName(user)
+//     })
+// ).then((data) => {
+//     fs.writeFile(`./videoIds.json`, JSON.stringify(data, null, 4), 'utf8', function (err) {
+//         if (err) {
+//             console.log('An error occured while writing JSON Object to File.')
+//             return console.log(err)
+//         }
+//     })
+//     data.map((item) => {
+//         return item.videoIds.map((videoId) => {
+//             return modifyRawComments(videoId)
+//         })
+//     })
+// })
+
+getFinalTimestamps(695399222)

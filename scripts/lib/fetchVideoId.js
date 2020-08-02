@@ -20,7 +20,7 @@ export const getVideoIdsByTwitchName = async (username) => {
                 .map((item) => {
                     return item.node.id
                 })
-                .slice(0, 5)
+                .slice(0, 2)
             return { username, videoIds: temp }
         })
         .catch(function (error) {
