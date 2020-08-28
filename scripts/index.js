@@ -44,6 +44,7 @@ const modifyRawComments = (videoId) => {
         })
     } catch (error) {
         console.log(error)
+        console.log('Aber hier werden nun die Arrays runtergeladen')
         fetchTwitchChatById(videoId, modifyRawComments)
     }
 }
@@ -55,7 +56,6 @@ const getFinalTimestamps = (videoId) => {
 
     modifiedComments.comments.map((item, index) => {
         if (item.filtered > item.average) {
-            // finalTimestamps.push(index * 10)
             finalTimestamps.push(Object.assign({}, item, { timestamp: index * 10 }))
         }
     })
@@ -91,5 +91,3 @@ const test = Promise.all(
         })
     })
 })
-
-// getFinalTimestamps(695399222)
