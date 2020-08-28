@@ -30,7 +30,8 @@ const Barchart = ({ data }) => {
                         <ui.Col
                             key={index}
                             onClick={() => {
-                                window.open(`https://www.twitch.tv/videos/${data.videoId}?t=${(index - 1) * 10}s`, '_blank')
+                                // window.open(`https://www.twitch.tv/videos/${data.videoId}?t=${(index - 1) * 10}s`, '_blank')
+                                window.open(`https://www.twitch.tv/videos/${data.videoId}?t=${item.timestamp}s`, '_blank') //final cut version
                             }}
                         >
                             <ui.Bar height={rawHeight}>

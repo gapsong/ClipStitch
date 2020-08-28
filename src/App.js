@@ -1,6 +1,6 @@
 import React from 'react'
 import Barchart from './Barchart'
-import data from './chatCollection/modified/640810556.json'
+import data from './chatCollection/final/722429779.json'
 
 function App() {
     return (

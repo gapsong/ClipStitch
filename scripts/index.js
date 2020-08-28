@@ -18,13 +18,18 @@ const modifyRawComments = (videoId) => {
         const level3 = getSlidingAverage(level2, 100)
         var mergedArray = []
         for (var i = 0; i < Math.min(level1.length, level2.length, level3.length); i++) {
-            mergedArray.push({ raw: level2[i], filtered: level1[i], average: level3[i] })
+            mergedArray.push({
+                raw: level2[i],
+                filtered: level1[i],
+                average: level3[i],
+                timestamp: i * 10
+            })
         }
         const jsonContent = JSON.stringify(
             {
                 videoId: videoId,
                 filteredTags: filteredTags,
-                comments: mergedArray,
+                comments: mergedArray
             },
             null,
             4
@@ -50,17 +55,23 @@ const getFinalTimestamps = (videoId) => {
 
     modifiedComments.comments.map((item, index) => {
         if (item.filtered > item.average) {
-            finalTimestamps.push(index * 10)
+            // finalTimestamps.push(index * 10)
+            finalTimestamps.push(Object.assign({}, item, { timestamp: index * 10 }))
         }
     })
 
-    fs.writeFile(`${PATH}/final/${videoId}.json`, JSON.stringify(finalTimestamps, null, 4), 'utf8', function (err) {
-        if (err) {
-            console.log('An error occured while writing JSON Object to File.')
-            return console.log(err)
+    fs.writeFile(
+        `${PATH}/final/${videoId}.json`,
+        JSON.stringify(Object.assign({}, modifiedComments, { comments: finalTimestamps }), null, 4),
+        'utf8',
+        function (err) {
+            if (err) {
+                console.log('An error occured while writing JSON Object to File.')
+                return console.log(err)
+            }
+            console.log('Final Timestamps')
         }
-        console.log('Final Timestamps')
-    })
+    )
 }
 
 const test = Promise.all(
@@ -80,6 +91,5 @@ const test = Promise.all(
         })
     })
 })
-
 
 // getFinalTimestamps(695399222)
