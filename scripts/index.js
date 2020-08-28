@@ -63,22 +63,23 @@ const getFinalTimestamps = (videoId) => {
     })
 }
 
-// const test = Promise.all(
-//     data.twitchUser.map((user) => {
-//         return getVideoIdsByTwitchName(user)
-//     })
-// ).then((data) => {
-//     fs.writeFile(`./videoIds.json`, JSON.stringify(data, null, 4), 'utf8', function (err) {
-//         if (err) {
-//             console.log('An error occured while writing JSON Object to File.')
-//             return console.log(err)
-//         }
-//     })
-//     data.map((item) => {
-//         return item.videoIds.map((videoId) => {
-//             return modifyRawComments(videoId)
-//         })
-//     })
-// })
+const test = Promise.all(
+    data.twitchUser.map((user) => {
+        return getVideoIdsByTwitchName(user)
+    })
+).then((data) => {
+    fs.writeFile(`./videoIds.json`, JSON.stringify(data, null, 4), 'utf8', function (err) {
+        if (err) {
+            console.log('An error occured while writing JSON Object to File.')
+            return console.log(err)
+        }
+    })
+    data.map((item) => {
+        return item.videoIds.map((videoId) => {
+            return modifyRawComments(videoId)
+        })
+    })
+})
 
-getFinalTimestamps(695399222)
+
+// getFinalTimestamps(695399222)
