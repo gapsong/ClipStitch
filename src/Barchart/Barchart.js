@@ -44,6 +44,8 @@ const Barchart = ({ data }) => {
                             {item.filtered}
                             <br />
                             {item.average}
+                            <br />
+                            {item.timestamp}
                         </ui.Col>
                     )
                 })}

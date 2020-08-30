@@ -55,7 +55,7 @@ const getFinalTimestamps = (videoId) => {
     const finalTimestamps = []
 
     modifiedComments.comments.map((item, index) => {
-        if (item.filtered > item.average) {
+        if (item.filtered > item.average / 2 && modifiedComments.comments[index ? index - 1 : 0].raw * 10 < item.raw) {
             finalTimestamps.push(Object.assign({}, item, { timestamp: index * 10 }))
         }
     })

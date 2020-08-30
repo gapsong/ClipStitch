@@ -1,11 +1,16 @@
 import React from 'react'
 import Barchart from './Barchart'
-import data from './chatCollection/final/722429779.json'
+import modified from './chatCollection/final/724101630.json'
+import final from './chatCollection/final/723072794.json'
 
 function App() {
     return (
         <div>
-            <Barchart data={data} />
+            <h1>Modfied</h1>
+            {/* <Barchart data={modified} /> */}
+            <h1>Final</h1>
+            <Barchart data={modified} />
+            <Barchart data={final} />
         </div>
     )
 }

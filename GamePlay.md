@@ -1,4 +1,3 @@
-1. Twitch Names | twitchNames.json
-2. Get Video IDs from Names | videoIds.json
-3. Get Twitch chats | username/raw_132432.json -> username/modified_1234321.json
-4. Get Timestamps | username/final_1234321.json
+1. Validate the quality of final timestamps
+2. Download files
+3. Stitch them together
