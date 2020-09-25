@@ -1,6 +1,6 @@
 export const filterCommentsByWords = (array, substrings) => {
     return array.filter((item) => {
-        const str = item.message
+        const str = item.message.toLowerCase()
         if (str.length > 15) {
             return false
         }

@@ -11,7 +11,7 @@ const modifyRawComments = (videoId) => {
     try {
         const rawData = fs.readFileSync(`${PATH}/rawData/${videoId}.json`, 'utf-8')
         let rawComments = JSON.parse(rawData)
-        const filteredTags = ['LOL', 'LULW', 'KEKW', 'WTF', 'LMAO', 'lol', 'clip', 'OMEGALUL', 'POG', 'pog', 'POGGERS', 'PogU', 'pogu']
+        const filteredTags = ['lol', 'lul', 'clean', 'wtf', 'lmao', 'clip', 'omegalul', 'pog', 'poggers', 'pogu','clean', '5head', '5 head']
         const level0 = filterCommentsByWords(rawComments.comments, filteredTags)
         const level1 = sumArray10(level0)
         const level2 = sumArray10(rawComments.comments)
@@ -85,9 +85,30 @@ const test = Promise.all(
             return console.log(err)
         }
     })
+<<<<<<< Updated upstream
+=======
+}
+
+const test = Promise.all(
+    data.twitchUser.map((user) => {
+        return getVideoIdsByTwitchName(user)
+    })
+).then((data) => {
+    fs.writeFile(`./videoIds.json`, JSON.stringify(data, null, 4), 'utf8', function (err) {
+        if (err) {
+            console.log('An error occured while writing JSON Object to File.')
+            return console.log(err)
+        }
+    })
+>>>>>>> Stashed changes
     data.map((item) => {
         return item.videoIds.map((videoId) => {
             return modifyRawComments(videoId)
         })
     })
 })
+<<<<<<< Updated upstream
+=======
+
+// getFinalTimestamps(695399222)
+>>>>>>> Stashed changes
