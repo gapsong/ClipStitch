@@ -85,30 +85,9 @@ const test = Promise.all(
             return console.log(err)
         }
     })
-<<<<<<< Updated upstream
-=======
-}
-
-const test = Promise.all(
-    data.twitchUser.map((user) => {
-        return getVideoIdsByTwitchName(user)
-    })
-).then((data) => {
-    fs.writeFile(`./videoIds.json`, JSON.stringify(data, null, 4), 'utf8', function (err) {
-        if (err) {
-            console.log('An error occured while writing JSON Object to File.')
-            return console.log(err)
-        }
-    })
->>>>>>> Stashed changes
     data.map((item) => {
         return item.videoIds.map((videoId) => {
             return modifyRawComments(videoId)
         })
     })
 })
-<<<<<<< Updated upstream
-=======
-
-// getFinalTimestamps(695399222)
->>>>>>> Stashed changes
