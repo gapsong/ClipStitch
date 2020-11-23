@@ -54,3 +54,13 @@ To the filename that you want to use. The filenames have the same ID as the twic
 
  This UI was only for the analysis of the twitch data.
 
+
+# Why did I stop?
+
+I have heard that you need the permission of the streamer to put them into your video. Getting the best of video was not 
+the challenge.
+Generate the thumbnails automatically is.
+
+# Sidenote
+
+Everyone. Especially Recruiters. I even wrote tests for a hobby project. Tried out some Test-Driven-Development and it worked out pretty well. Checkout my pipeline. Even tried them out. Works well
