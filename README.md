@@ -1,223 +1,56 @@
-# Example Node Server w/ Babel
+# Twitchclips
 
-### Getting Started
+This repo is able to crawl the whole twitchchat of a streamer and shows you the activity of the chat.
+You can filter via keywords and check the activity of the chat during a specific time period.
 
-First we'll install `@babel/cli`, `@babel/core` and `@babel/preset-env`.
+Based on some metrics of the twitchchat the timestamps of the
+videoclip gets marked. Aterwards you can download this clip.
 
-```shell
-$ npm install --save-dev @babel/cli @babel/core @babel/preset-env
-```
 
-Then we'll create a `.babelrc` file for configuring babel.
+Metrics that got used:
+- Engagement of the chat using sliding window method
+- Specific keywords
 
-```shell
-$ touch .babelrc
-```
+If you want to know more of this project. Feel free to contact me. 
+I will explain everything to you
 
-This will host any options we might want to configure `babel` with.
-
-```json
-{
-  "presets": ["@babel/preset-env"]
-}
-```
-
-Then create our server in `index.js`.
+This project should have create "Best of" videos and upload them to youtube
+## Getting Started
 
 ```shell
-$ touch index.js
-```
-```js
-import http from 'http';
-
-const server = http.createServer((req, res) => {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Hello World\n');
-}).listen(1337, '127.0.0.1');
-
-console.log('Server running at http://127.0.0.1:1337/');
-
-export default server;
+$ npm install
 ```
 
-With recent changes to babel, you will need to transpile your ES6 before node can run it.
+update the ```twitchNames.json``` with all the streamers you want to crawl. 
 
-So, we'll add our first script, `build`, in `package.json`.
-
-```diff
-  "scripts": {
-+   "build": "babel index.js -d dist"
-  }
-```
-
-Then we'll add our `start` script in `package.json`.
-
-
-```diff
-  "scripts": {
-   "build": "babel index.js -d dist",
-+   "start": "npm run build && node dist/index.js"
-  }
-```
-
-Now let's start our server.
-
+To start the crawler run:
 ```shell
-$ npm start
+$ npm run start
 ```
 
-You should now be able to visit `http://127.0.0.1:1337` and see `Hello World`.
-
-### Watching file changes with `nodemon`
-
-We can improve our `npm start` script with `nodemon`.
-
+You can show the activity bar charts via
 ```shell
-$ npm install --save-dev nodemon
+$ npm run rs
 ```
 
-Then we can update our `npm start` script.
+at localhost:3000
 
-```diff
-  "scripts": {
-    "build": "babel index.js -d dist",
--   "start": "npm run build && node dist/index.js"
-+   "start": "npm run build && nodemon dist/index.js"
-  }
-```
-
-Then we'll restart our server.
-
-```shell
-$ npm start
-```
-
-You should now be able to make changes to `index.js` and our server should be
-restarted automatically by `nodemon`.
-
-Go ahead and replace `Hello World` with `Hello {{YOUR_NAME_HERE}}` while our
-server is running.
-
-If you visit `http://127.0.0.1:1337` you should see our server greeting you.
-
-### Getting ready for production use
-
-First let's move our server `index.js` file to `lib/index.js`.
-
-```shell
-$ mkdir lib
-$ mv index.js lib/index.js
-```
-
-And update our `npm start` script to reflect the location change.
-
-```diff
-  "scripts": {
--   "build": "babel index.js -d dist",
-+   "build": "babel lib -d dist",
-    "start": "npm run build && nodemon dist/index.js"
-  }
-```
-
-Next let's add a new task: `npm run serve`.
-
-```diff
-  "scripts": {
-    "build": "babel lib -d dist",
-    "start": "npm run build && nodemon dist/index.js",
-+   "serve": "node dist/index.js"
-  }
-```
-
-Now we can use `npm run build` for precompiling our assets, and `npm run serve`
-for starting our server in production.
-
-```shell
-$ npm run build
-$ npm run serve
-```
-
-This means we can quickly restart our server without waiting for `babel` to
-recompile our files.
-
-Oh, let's not forget to add `dist` to our `.gitignore` file:
-
-```shell
-$ touch .gitignore
-```
+At the moment you have to rename the imported json in the ```src/App.js```
 
 ```
-dist
+import modified from './chatCollection/modified/750845070.json'
+import final from './chatCollection/modified/750845070.json'
 ```
 
-This will make sure we don't accidentally commit our built files to git.
+To the filename that you want to use. The filenames have the same ID as the twichvideo itself.
 
-### Testing the server
+ <img src="docs/clipstitch.png" width="800">
 
-Finally let's make sure our server is well tested.
+ Every bar represents a 10 secs if the twitchchat. 
+ The redline defines the average activity of the twitch chat.
+ The green line defines all the found keywords during the 10 secs.
 
-Let's install `mocha`.
+ You can click on any bar and will get redirected to the clip on twitch.tv
 
-```shell
-$ npm install --save-dev mocha
-```
+ This UI was only for the analysis of the twitch data.
 
-And create our test in `test/index.js`.
-
-```shell
-$ mkdir test
-$ touch test/index.js
-```
-
-```js
-import http from 'http';
-import assert from 'assert';
-
-import server from '../lib/index.js';
-
-describe('Example Node Server', () => {
-  it('should return 200', done => {
-    http.get('http://127.0.0.1:1337', res => {
-      assert.equal(200, res.statusCode);
-      server.close();
-      done();
-    });
-  });
-});
-```
-
-Next, install `@babel/register` for the require hook.
-
-```shell
-$ npm install --save-dev @babel/register
-```
-
-Then we can add an `npm test` script.
-
-```diff
-  "scripts": {
-    "start": "nodemon lib/index.js --exec babel-node",
-    "build": "babel lib -d dist",
-    "serve": "node dist/index.js",
-+   "test": "mocha --require @babel/register"
-  }
-```
-
-Now let's run our tests.
-
-```shell
-$ npm test
-```
-
-You should see the following:
-
-```shell
-Server running at http://127.0.0.1:1337/
-
-  Example Node Server
-    ✓ should return 200
-
-  1 passing (43ms)
-```
-
-That's it!
